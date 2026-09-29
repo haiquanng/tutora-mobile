@@ -40,8 +40,9 @@ android {
 
     defaultConfig {
         // Package trên Google Play — KHÔNG đổi sau lần upload đầu tiên.
-        // App ghi âm cho gia sư; khác app chính (học sinh / phụ huynh) dùng vn.tutora.mb.
-        applicationId = "vn.tutora.record"
+        // App ghi âm cho gia sư, thương hiệu TopTutor (2026-09-29); khác app chính (học sinh / phụ
+        // huynh) dùng vn.tutora.mb. Không đổi được nữa sau lần upload đầu lên Google Play.
+        applicationId = "ai.toptutor.record"
         // You can update the following values to match your application needs.
         // For more information, see: https://flutter.dev/to/review-gradle-config.
         minSdk = flutter.minSdkVersion
