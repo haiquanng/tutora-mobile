@@ -41,7 +41,7 @@ Future<bool> showAiFeedbackSheet(
       ..hideCurrentSnackBar()
       ..showSnackBar(
         const SnackBar(
-          content: Text('Cảm ơn bạn đã báo. Tutora sẽ xem lại nội dung này.'),
+          content: Text('Cảm ơn bạn đã báo. TopTutor sẽ xem lại nội dung này.'),
           behavior: SnackBarBehavior.floating,
         ),
       );
@@ -124,7 +124,7 @@ class _AiFeedbackSheetState extends ConsumerState<_AiFeedbackSheet> {
         ),
         const SizedBox(height: 4),
         const Text(
-          'Tutora dùng báo cáo này để sửa cách AI tóm tắt. Bạn vẫn sửa được '
+          'TopTutor dùng báo cáo này để sửa cách AI tóm tắt. Bạn vẫn sửa được '
           'nội dung trước khi gửi phụ huynh.',
           style: TextStyle(fontSize: 13, color: TutorColors.ink3, height: 1.35),
         ),

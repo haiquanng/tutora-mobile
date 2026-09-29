@@ -424,7 +424,7 @@ class _PreviewScreenState extends ConsumerState<_PreviewScreen> {
                     phone: student?.parentPhone,
                     channel: _offPlatform
                         ? 'Gửi qua tin giao dịch Zalo OA'
-                        : 'Gửi qua báo cáo buổi học trên Tutora',
+                        : 'Gửi qua báo cáo buổi học trên TopTutor',
                     showZalo:
                         _offPlatform &&
                         (student?.parentPhone?.isNotEmpty ?? false),

@@ -64,12 +64,12 @@ class _TutorRecordingScreenState extends ConsumerState<TutorRecordingScreen> {
         context: context,
         barrierDismissible: false,
         builder: (ctx) => AlertDialog(
-          title: const Text('Cho phép Tutora dùng micro'),
+          title: const Text('Cho phép TopTutor dùng micro'),
           content: const Text(
-            'Tutora cần quyền micro để ghi âm buổi học. Ứng dụng chỉ ghi khi '
+            'TopTutor cần quyền micro để ghi âm buổi học. Ứng dụng chỉ ghi khi '
             'bạn bấm ghi âm, và vẫn ghi khi màn hình tắt cho tới khi bạn kết '
             'thúc buổi.\n\n'
-            'Bản ghi được tải lên kho lưu trữ riêng tư của Tutora, xử lý bằng '
+            'Bản ghi được tải lên kho lưu trữ riêng tư của TopTutor, xử lý bằng '
             'AI (Google Gemini) để soạn báo cáo gửi phụ huynh qua Zalo, và tự '
             'động xoá sau 90 ngày.\n\n'
             'Chỉ ghi âm khi phụ huynh đã đồng ý.',

@@ -852,7 +852,7 @@ class _StudentList extends StatelessWidget {
                                 if (!s.hasConsent)
                                   'Chưa có đồng ý ghi âm'
                                 else
-                                  'Ngoài Tutora',
+                                  'Ngoài TopTutor',
                               ].join(' · '),
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
@@ -915,7 +915,7 @@ class _StudentList extends StatelessWidget {
                     ),
                     SizedBox(width: 6),
                     Text(
-                      'Thêm học sinh ngoài Tutora',
+                      'Thêm học sinh ngoài TopTutor',
                       style: TextStyle(
                         fontSize: 13.5,
                         fontWeight: FontWeight.w600,

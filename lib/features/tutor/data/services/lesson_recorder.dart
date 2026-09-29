@@ -322,7 +322,7 @@ class LessonRecorder {
         channelId: 'tutora_lesson_recording',
         channelName: 'Ghi âm buổi học',
         channelDescription:
-            'Hiện trong lúc Tutora đang ghi âm buổi dạy của bạn.',
+            'Hiện trong lúc TopTutor đang ghi âm buổi dạy của bạn.',
         onlyAlertOnce: true,
       ),
       iosNotificationOptions: const IOSNotificationOptions(),
@@ -341,7 +341,7 @@ class LessonRecorder {
       // Thông báo này vừa là yêu cầu kỹ thuật của foreground service, vừa là
       // chỉ báo bắt buộc theo chính sách cửa hàng: người trong phòng phải nhìn
       // thấy được là máy đang ghi.
-      notificationTitle: 'Tutora đang ghi âm buổi học',
+      notificationTitle: 'TopTutor đang ghi âm buổi học',
       notificationText: 'Chạm để quay lại app',
       callback: lessonRecorderCallback,
     );
