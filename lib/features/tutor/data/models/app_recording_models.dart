@@ -36,12 +36,73 @@ class AppRecordingUploadUrlDto {
   final String url;
 }
 
-/// Tóm tắt buổi (biên bản ngắn) cho gia sư — thay cho lời thoại đầy đủ.
+/// Một phần diễn biến buổi học.
+class MinutesSectionDto {
+  const MinutesSectionDto({this.title, this.details = const []});
+
+  factory MinutesSectionDto.fromJson(Map<String, dynamic> j) =>
+      MinutesSectionDto(
+        title: _text(j['title']),
+        details: SessionMinutesDto._strings(j['details']),
+      );
+
+  final String? title;
+  final List<String> details;
+}
+
+/// Một bài đã làm — ghi theo dạng bài, không chép đề.
+class MinutesExerciseDto {
+  const MinutesExerciseDto({required this.type, this.result, this.note});
+
+  factory MinutesExerciseDto.fromJson(Map<String, dynamic> j) =>
+      MinutesExerciseDto(
+        type: _text(j['type']) ?? '',
+        result: _text(j['result']),
+        note: _text(j['note']),
+      );
+
+  final String type;
+
+  /// "Tự làm đúng" / "Đúng sau khi được gợi ý" / "Làm sai" / "Chưa làm xong" / "Gia sư làm mẫu".
+  final String? result;
+  final String? note;
+}
+
+/// Gợi ý về cách dạy: nhận xét + tình huống/câu hỏi gợi ý.
+class TeachingNoteDto {
+  const TeachingNoteDto({required this.content, this.example});
+
+  factory TeachingNoteDto.fromJson(Map<String, dynamic> j) => TeachingNoteDto(
+    content: _text(j['content']) ?? '',
+    example: _text(j['example']),
+  );
+
+  final String content;
+  final String? example;
+}
+
+String? _text(Object? v) {
+  final s = v is String ? v.trim() : '';
+  return s.isEmpty ? null : s;
+}
+
+List<T> _objects<T>(Object? v, T Function(Map<String, dynamic>) parse) =>
+    v is List
+    ? v.whereType<Map<String, dynamic>>().map(parse).toList()
+    : const [];
+
+/// Biên bản buổi học cho gia sư — đọc lại thay cho nghe lại cả buổi.
 class SessionMinutesDto {
   const SessionMinutesDto({
     this.summary,
     this.keyPoints = const [],
     this.followUps = const [],
+    this.sections = const [],
+    this.exercises = const [],
+    this.strengths = const [],
+    this.difficulties = const [],
+    this.usefulNotes = const [],
+    this.teachingNotes = const [],
   });
 
   factory SessionMinutesDto.fromJson(Map<String, dynamic> j) =>
@@ -49,6 +110,21 @@ class SessionMinutesDto {
         summary: j['summary'] as String?,
         keyPoints: _strings(j['keyPoints']),
         followUps: _strings(j['followUps']),
+        sections: _objects(
+          j['sections'],
+          MinutesSectionDto.fromJson,
+        ).where((s) => s.title != null || s.details.isNotEmpty).toList(),
+        exercises: _objects(
+          j['exercises'],
+          MinutesExerciseDto.fromJson,
+        ).where((e) => e.type.isNotEmpty).toList(),
+        strengths: _strings(j['strengths']),
+        difficulties: _strings(j['difficulties']),
+        usefulNotes: _strings(j['usefulNotes']),
+        teachingNotes: _objects(
+          j['teachingNotes'],
+          TeachingNoteDto.fromJson,
+        ).where((n) => n.content.isNotEmpty).toList(),
       );
 
   static List<String> _strings(Object? v) => v is List
@@ -67,8 +143,34 @@ class SessionMinutesDto {
   /// Việc cần làm buổi sau.
   final List<String> followUps;
 
+  /// Diễn biến buổi học theo thứ tự.
+  final List<MinutesSectionDto> sections;
+
+  /// Bài đã làm, theo dạng bài.
+  final List<MinutesExerciseDto> exercises;
+
+  /// Học sinh đã nắm.
+  final List<String> strengths;
+
+  /// Học sinh còn vướng.
+  final List<String> difficulties;
+
+  /// Thông tin hữu ích cho việc dạy.
+  final List<String> usefulNotes;
+
+  /// Gợi ý về cách dạy.
+  final List<TeachingNoteDto> teachingNotes;
+
   bool get isEmpty =>
-      (summary ?? '').trim().isEmpty && keyPoints.isEmpty && followUps.isEmpty;
+      (summary ?? '').trim().isEmpty &&
+      keyPoints.isEmpty &&
+      followUps.isEmpty &&
+      sections.isEmpty &&
+      exercises.isEmpty &&
+      strengths.isEmpty &&
+      difficulties.isEmpty &&
+      usefulNotes.isEmpty &&
+      teachingNotes.isEmpty;
 }
 
 /// Trạng thái bản ghi + báo cáo AI khi đã có.

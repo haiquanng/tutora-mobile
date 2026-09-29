@@ -533,6 +533,25 @@ class _MinutesTab extends StatelessWidget {
 
   final AppRecordingStatusDto status;
 
+  static const _bullet = Padding(
+    padding: EdgeInsets.only(top: 8),
+    child: SizedBox(
+      width: 6,
+      height: 6,
+      child: DecoratedBox(
+        decoration: BoxDecoration(
+          color: TutorColors.primary,
+          shape: BoxShape.circle,
+        ),
+      ),
+    ),
+  );
+
+  static Widget _icon(IconData icon, Color color) => Padding(
+    padding: const EdgeInsets.only(top: 1),
+    child: Icon(icon, size: 18, color: color),
+  );
+
   @override
   Widget build(BuildContext context) {
     final m = status.sessionMinutes;
@@ -551,15 +570,7 @@ class _MinutesTab extends StatelessWidget {
           )
         else ...[
           if (summary.isNotEmpty) ...[
-            const Text(
-              'Tóm tắt',
-              style: TextStyle(
-                fontSize: 17,
-                fontWeight: FontWeight.w700,
-                color: TutorColors.ink,
-              ),
-            ),
-            const SizedBox(height: 8),
+            const _MinutesHeading('Tóm tắt'),
             SelectableText(
               summary,
               style: const TextStyle(
@@ -570,54 +581,83 @@ class _MinutesTab extends StatelessWidget {
             ),
             const SizedBox(height: 20),
           ],
-          if (m.keyPoints.isNotEmpty) ...[
-            const Text(
-              'Ý chính',
-              style: TextStyle(
-                fontSize: 17,
-                fontWeight: FontWeight.w700,
-                color: TutorColors.ink,
-              ),
-            ),
-            const SizedBox(height: 8),
-            for (final k in m.keyPoints)
-              _ListItem(
-                leading: const Padding(
-                  padding: EdgeInsets.only(top: 8),
-                  child: SizedBox(
-                    width: 6,
-                    height: 6,
-                    child: DecoratedBox(
-                      decoration: BoxDecoration(
-                        color: TutorColors.primary,
-                        shape: BoxShape.circle,
-                      ),
-                    ),
+          if (m.sections.isNotEmpty) ...[
+            const _MinutesHeading('Diễn biến buổi học'),
+            for (final (i, s) in m.sections.indexed) ...[
+              Padding(
+                padding: const EdgeInsets.only(bottom: 6),
+                child: Text(
+                  '${i + 1}. ${s.title ?? ''}',
+                  style: const TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.w600,
+                    color: TutorColors.ink,
                   ),
                 ),
-                text: k,
+              ),
+              for (final d in s.details) _ListItem(leading: _bullet, text: d),
+              const SizedBox(height: 6),
+            ],
+            const SizedBox(height: 12),
+          ],
+          if (m.exercises.isNotEmpty) ...[
+            _MinutesHeading('Bài đã làm (${m.exercises.length})'),
+            for (final e in m.exercises) _ExerciseCard(exercise: e),
+            const SizedBox(height: 14),
+          ],
+          if (m.strengths.isNotEmpty) ...[
+            const _MinutesHeading('Học sinh đã nắm'),
+            for (final s in m.strengths)
+              _ListItem(
+                leading: _icon(
+                  Icons.check_circle_outline_rounded,
+                  TutorColors.success,
+                ),
+                text: s,
               ),
             const SizedBox(height: 12),
           ],
-          if (m.followUps.isNotEmpty) ...[
-            const Text(
-              'Việc cần làm buổi sau',
-              style: TextStyle(
-                fontSize: 17,
-                fontWeight: FontWeight.w700,
-                color: TutorColors.ink,
+          if (m.difficulties.isNotEmpty) ...[
+            const _MinutesHeading('Học sinh còn vướng'),
+            for (final d in m.difficulties)
+              _ListItem(
+                leading: _icon(
+                  Icons.error_outline_rounded,
+                  TutorColors.warning,
+                ),
+                text: d,
               ),
-            ),
-            const SizedBox(height: 8),
+            const SizedBox(height: 12),
+          ],
+          if (m.usefulNotes.isNotEmpty) ...[
+            const _MinutesHeading('Thông tin hữu ích'),
+            for (final u in m.usefulNotes)
+              _ListItem(
+                leading: _icon(
+                  Icons.lightbulb_outline_rounded,
+                  TutorColors.accent,
+                ),
+                text: u,
+              ),
+            const SizedBox(height: 12),
+          ],
+          if (m.teachingNotes.isNotEmpty) ...[
+            const _MinutesHeading('Gợi ý cách dạy'),
+            for (final n in m.teachingNotes) _TeachingNoteCard(note: n),
+            const SizedBox(height: 14),
+          ],
+          if (m.keyPoints.isNotEmpty) ...[
+            const _MinutesHeading('Ý chính'),
+            for (final k in m.keyPoints) _ListItem(leading: _bullet, text: k),
+            const SizedBox(height: 12),
+          ],
+          if (m.followUps.isNotEmpty) ...[
+            const _MinutesHeading('Việc cần làm buổi sau'),
             for (final f in m.followUps)
               _ListItem(
-                leading: const Padding(
-                  padding: EdgeInsets.only(top: 1),
-                  child: Icon(
-                    Icons.check_box_outline_blank_rounded,
-                    size: 19,
-                    color: TutorColors.ink4,
-                  ),
+                leading: _icon(
+                  Icons.check_box_outline_blank_rounded,
+                  TutorColors.ink4,
                 ),
                 text: f,
               ),
@@ -626,6 +666,136 @@ class _MinutesTab extends StatelessWidget {
       ],
     );
   }
+}
+
+class _MinutesHeading extends StatelessWidget {
+  const _MinutesHeading(this.text);
+
+  final String text;
+
+  @override
+  Widget build(BuildContext context) => Padding(
+    padding: const EdgeInsets.only(bottom: 8),
+    child: Text(
+      text,
+      style: const TextStyle(
+        fontSize: 17,
+        fontWeight: FontWeight.w700,
+        color: TutorColors.ink,
+      ),
+    ),
+  );
+}
+
+class _ExerciseCard extends StatelessWidget {
+  const _ExerciseCard({required this.exercise});
+
+  final MinutesExerciseDto exercise;
+
+  (Color, Color) get _tone => switch (exercise.result) {
+    'Tự làm đúng' => (TutorColors.success, TutorColors.successBg),
+    'Đúng sau khi được gợi ý' => (TutorColors.warning, TutorColors.warningBg),
+    'Làm sai' => (TutorColors.danger, TutorColors.dangerBg),
+    _ => (TutorColors.ink3, TutorColors.surfaceSunken),
+  };
+
+  @override
+  Widget build(BuildContext context) {
+    final (fg, bg) = _tone;
+    return Container(
+      margin: const EdgeInsets.only(bottom: 8),
+      padding: const EdgeInsets.all(12),
+      decoration: BoxDecoration(
+        color: TutorColors.surface,
+        borderRadius: BorderRadius.circular(10),
+        border: Border.all(color: TutorColors.line),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            exercise.type,
+            style: const TextStyle(
+              fontSize: 15,
+              height: 1.45,
+              color: TutorColors.ink,
+            ),
+          ),
+          if (exercise.result != null) ...[
+            const SizedBox(height: 6),
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+              decoration: BoxDecoration(
+                color: bg,
+                borderRadius: BorderRadius.circular(6),
+              ),
+              child: Text(
+                exercise.result!,
+                style: TextStyle(
+                  fontSize: 12.5,
+                  fontWeight: FontWeight.w600,
+                  color: fg,
+                ),
+              ),
+            ),
+          ],
+          if (exercise.note != null) ...[
+            const SizedBox(height: 6),
+            Text(
+              exercise.note!,
+              style: const TextStyle(
+                fontSize: 13.5,
+                height: 1.45,
+                color: TutorColors.ink3,
+              ),
+            ),
+          ],
+        ],
+      ),
+    );
+  }
+}
+
+class _TeachingNoteCard extends StatelessWidget {
+  const _TeachingNoteCard({required this.note});
+
+  final TeachingNoteDto note;
+
+  @override
+  Widget build(BuildContext context) => Container(
+    margin: const EdgeInsets.only(bottom: 8),
+    padding: const EdgeInsets.all(12),
+    decoration: BoxDecoration(
+      color: TutorColors.accentBg,
+      borderRadius: BorderRadius.circular(10),
+      border: Border.all(color: TutorColors.accentBorder),
+    ),
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          note.content,
+          style: const TextStyle(
+            fontSize: 15,
+            height: 1.45,
+            color: TutorColors.ink,
+          ),
+        ),
+        if (note.example != null) ...[
+          const SizedBox(height: 6),
+          Text(
+            note.example!,
+            style: const TextStyle(
+              fontSize: 13.5,
+              height: 1.45,
+              fontStyle: FontStyle.italic,
+              color: TutorColors.ink3,
+            ),
+          ),
+        ],
+      ],
+    ),
+  );
 }
 
 class _ListItem extends StatelessWidget {
