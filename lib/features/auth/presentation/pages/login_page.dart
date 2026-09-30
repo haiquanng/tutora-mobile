@@ -17,7 +17,7 @@ import 'package:tutora/shared/widgets/app_toast.dart';
 
 /// Thông báo khi tài khoản học sinh / phụ huynh đăng nhập vào app gia sư.
 const tutorOnlyMessage =
-    'Ứng dụng này dành cho gia sư. Vui lòng dùng web tutora.vn.';
+    'Ứng dụng này dành cho gia sư. Vui lòng dùng web toptutor.ai.';
 
 class LoginPage extends ConsumerStatefulWidget {
   const LoginPage({super.key});
