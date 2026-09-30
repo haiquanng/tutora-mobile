@@ -853,7 +853,10 @@ class _ZaloCard extends StatelessWidget {
               children: [
                 const _Avatar(name: 'T', size: 26, fontSize: 11, dark: true),
                 const SizedBox(width: 9),
-                Text('TopTutor', style: _t(13, FontWeight.w600, TutorColors.ink)),
+                Text(
+                  'TopTutor',
+                  style: _t(13, FontWeight.w600, TutorColors.ink),
+                ),
                 const SizedBox(width: 6),
                 Container(
                   padding: const EdgeInsets.symmetric(

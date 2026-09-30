@@ -8,7 +8,8 @@ import 'package:url_launcher/url_launcher.dart';
 abstract final class LegalLinks {
   static const String terms = 'https://toptutor.ai/policies/terms';
   static const String privacy = 'https://toptutor.ai/policies/privacy-app';
-  static const String dataDeletion = 'https://toptutor.ai/policies/data-deletion';
+  static const String dataDeletion =
+      'https://toptutor.ai/policies/data-deletion';
 }
 
 /// Mở [url] bằng trình duyệt ngoài. Trả `false` nếu không mở được.
