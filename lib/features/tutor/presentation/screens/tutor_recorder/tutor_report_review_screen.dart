@@ -853,7 +853,7 @@ class _ZaloCard extends StatelessWidget {
               children: [
                 const _Avatar(name: 'T', size: 26, fontSize: 11, dark: true),
                 const SizedBox(width: 9),
-                Text('Tutora', style: _t(13, FontWeight.w600, TutorColors.ink)),
+                Text('TopTutor', style: _t(13, FontWeight.w600, TutorColors.ink)),
                 const SizedBox(width: 6),
                 Container(
                   padding: const EdgeInsets.symmetric(
@@ -901,7 +901,7 @@ class _ZaloCard extends StatelessWidget {
                 const Divider(height: 1, color: TutorColors.line),
                 const SizedBox(height: 11),
                 Text(
-                  'Xem thông tin Tutora',
+                  'Xem thông tin TopTutor',
                   style: _t(13, FontWeight.w600, TutorColors.primary),
                 ),
               ],
