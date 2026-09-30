@@ -26,7 +26,7 @@ class _AppState extends ConsumerState<App> {
     final router = ref.watch(appRouterProvider);
 
     return MaterialApp.router(
-      title: 'Tutora',
+      title: 'TopTutor',
       debugShowCheckedModeBanner: false,
       theme: AppTheme.light,
       locale: const Locale('vi'),

@@ -56,7 +56,7 @@ class AuthTopDeco extends StatelessWidget {
             top: statusBarH + 20,
             left: 24,
             child: Text(
-              'TUTORA.',
+              'TOPTUTOR.',
               style: GoogleFonts.bricolageGrotesque(
                 fontWeight: FontWeight.w800,
                 fontSize: 13,

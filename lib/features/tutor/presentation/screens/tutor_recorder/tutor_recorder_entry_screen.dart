@@ -619,7 +619,7 @@ class _NoSessionToday extends StatelessWidget {
           ),
           const SizedBox(height: 12),
           Text(
-            'Hôm nay không có buổi nào trên Tutora',
+            'Hôm nay không có buổi nào trên TopTutor',
             style: TutorType.rowTitle(),
             textAlign: TextAlign.center,
           ),
@@ -801,7 +801,7 @@ class _AddStudentRow extends StatelessWidget {
               ),
               const SizedBox(width: 6),
               Text(
-                'Thêm học sinh ngoài Tutora',
+                'Thêm học sinh ngoài TopTutor',
                 style: TutorType.action(color: TutorColors.primary),
               ),
             ],

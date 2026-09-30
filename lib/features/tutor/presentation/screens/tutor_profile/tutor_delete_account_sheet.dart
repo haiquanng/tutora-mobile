@@ -87,7 +87,7 @@ class _DeleteAccountSheetState extends ConsumerState<_DeleteAccountSheet> {
           const SizedBox(height: 12),
           Text(
             'Tài khoản sẽ bị khoá ngay và không thể khôi phục. Sau 30 ngày, '
-            'Tutora xoá vĩnh viễn thông tin cá nhân, danh sách học sinh, báo '
+            'TopTutor xoá vĩnh viễn thông tin cá nhân, danh sách học sinh, báo '
             'cáo và bản ghi âm của bạn. Báo cáo chưa gửi sẽ bị huỷ.',
             style: AppTextStyles.body(),
           ),

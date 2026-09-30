@@ -142,7 +142,7 @@ class _ForgotPageState extends ConsumerState<ForgotPage> {
                     ),
                     const SizedBox(height: 10),
                     Text(
-                      'Nhập số điện thoại đã đăng ký — Tutora sẽ gửi mã OTP qua Zalo để đặt lại mật khẩu.',
+                      'Nhập số điện thoại đã đăng ký — TopTutor sẽ gửi mã OTP qua Zalo để đặt lại mật khẩu.',
                       style: GoogleFonts.inter(
                         fontSize: 13,
                         color: AppColors.ink3,

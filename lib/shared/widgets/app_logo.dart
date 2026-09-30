@@ -13,7 +13,7 @@ class AppLogo extends StatelessWidget {
       text: TextSpan(
         children: [
           TextSpan(
-            text: 'TUTORA',
+            text: 'TOPTUTOR',
             style: GoogleFonts.bricolageGrotesque(
               fontWeight: FontWeight.w800,
               fontSize: size,

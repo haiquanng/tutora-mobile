@@ -30,7 +30,7 @@
         android:dataExtractionRules="@xml/data_extraction_rules"
         tools:replace="android:allowBackup,android:fullBackupContent,android:dataExtractionRules"
         android:usesCleartextTraffic="false"
-        android:label="Tutora"
+        android:label="TopTutor"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"

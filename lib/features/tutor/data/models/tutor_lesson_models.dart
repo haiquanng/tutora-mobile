@@ -176,7 +176,7 @@ class TutorLessonDto {
 
   /// Nhãn cho buổi sinh thêm
   String? get linkLabel =>
-      isOffPlatform ? 'Ngoài Tutora' : (isExtra ? 'Buổi học phụ' : null);
+      isOffPlatform ? 'Ngoài TopTutor' : (isExtra ? 'Buổi học phụ' : null);
 
   /// Buổi SINH THÊM để bù cho buổi gốc
   bool get isExtra => isContinuation || isDisputeRelearn;

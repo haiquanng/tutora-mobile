@@ -414,7 +414,7 @@ class TutorSessionDetailScreen extends ConsumerWidget {
   static void _soon(BuildContext context) {
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(
-        content: Text('Chức năng này chưa có trên app — làm trên tutora.vn.'),
+        content: Text('Chức năng này chưa có trên app — làm trên toptutor.ai.'),
         behavior: SnackBarBehavior.floating,
       ),
     );

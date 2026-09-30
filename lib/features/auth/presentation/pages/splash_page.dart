@@ -78,7 +78,7 @@ class _SplashPageState extends ConsumerState<SplashPage> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text('TUTORA', style: AppTextStyles.h1(color: AppColors.cream)),
+            Text('TOPTUTOR', style: AppTextStyles.h1(color: AppColors.cream)),
             Text('.', style: AppTextStyles.h1(color: AppColors.oxblood)),
           ],
         ),

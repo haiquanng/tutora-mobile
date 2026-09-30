@@ -442,7 +442,7 @@ class _ConsentRow extends StatelessWidget {
                       ),
                     ),
                   ),
-                  const TextSpan(text: ' của Tutora.'),
+                  const TextSpan(text: ' của TopTutor.'),
                 ],
               ),
             ),
