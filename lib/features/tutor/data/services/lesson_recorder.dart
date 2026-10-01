@@ -319,10 +319,17 @@ class LessonRecorder {
   Future<void> _startForegroundService() async {
     FlutterForegroundTask.init(
       androidNotificationOptions: AndroidNotificationOptions(
-        channelId: 'tutora_lesson_recording',
+        // Kênh mới (id mới): Android không cho nâng mức quan trọng của kênh đã
+        // tạo, nên máy đã cài bản cũ vẫn giữ kênh LOW nếu dùng lại id cũ.
+        // Mức DEFAULT để thông báo hiện cả trên màn hình khoá (LOW bị Android
+        // 14+ ẩn khỏi màn hình khoá theo mặc định). Không chuông, không rung
+        // (playSound/enableVibration mặc định false).
+        channelId: 'toptutor_lesson_recording',
         channelName: 'Ghi âm buổi học',
         channelDescription:
             'Hiện trong lúc TopTutor đang ghi âm buổi dạy của bạn.',
+        channelImportance: NotificationChannelImportance.DEFAULT,
+        priority: NotificationPriority.DEFAULT,
         onlyAlertOnce: true,
       ),
       iosNotificationOptions: const IOSNotificationOptions(),
@@ -343,6 +350,11 @@ class LessonRecorder {
       // thấy được là máy đang ghi.
       notificationTitle: 'TopTutor đang ghi âm buổi học',
       notificationText: 'Chạm để quay lại app',
+      // Biểu tượng TopTutor trắng (ic_stat_name, dùng chung với thông báo đẩy);
+      // không đặt thì Android lấy icon app và vẽ thành một vòng tròn trơn.
+      notificationIcon: const NotificationIcon(
+        metaDataName: 'com.google.firebase.messaging.default_notification_icon',
+      ),
       callback: lessonRecorderCallback,
     );
   }
